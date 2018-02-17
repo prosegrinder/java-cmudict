@@ -1,0 +1,3 @@
+[submodule "src/main/resources/cmusphinx/cmudict"]
+	path = src/main/resources/cmusphinx/cmudict
+	url = https://github.com/cmusphinx/cmudict.git
