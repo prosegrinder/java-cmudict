@@ -119,4 +119,8 @@
     </plugins>
 	</build>
   
+  <scm>
+  	 <url>https://github.com/prosegrinder/java-cmudict</url>
+  </scm>
+  <description>Java wrapper for The CMU Pronouncing Dictionary files.</description>
 </project>
