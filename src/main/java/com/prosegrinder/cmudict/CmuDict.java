@@ -28,21 +28,21 @@ public class CmuDict {
   public CmuDict() {
     if (CmuDict.phonemeStringMap.isEmpty()) {
       logger.info("Loading cmudict.dict.");
-      CmuDict.loadPhonemeMap();
+      CmuDict.loadPhonemeStringMap();
     }
   }
 
   public final Map<String, String> getPhonemeMap() {
     if (phonemeStringMap.isEmpty()) {
-      loadPhonemeMap();
+      loadPhonemeStringMap();
     }
     return CmuDict.phonemeStringMap;
   }
 
 
-  private static final void loadPhonemeMap() {
+  private static final void loadPhonemeStringMap() {
     ClassLoader classLoader = CmuDict.class.getClassLoader();
-    InputStream in = classLoader.getResourceAsStream("cmusphix/cmudict/cmudict.dict");
+    InputStream in = classLoader.getResourceAsStream("cmusphinx/cmudict/cmudict.dict");
     try {
       // Updated based on: https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
