@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ public class CmuDict {
       LoggerFactory.getLogger(CmuDict.class);
 
   public static final Map<String, String> getDict() {
+    logger.info("Loading cmudict.dict");
     Stream<String> stream = CmuDict.getDictStream();
     Map<String, String> dictMap = new HashMap<String, String>();
     stream.forEach(line -> {
@@ -59,8 +61,8 @@ public class CmuDict {
   }
 
   public static final List<String> getSymbols() {
-    logger.info("Loading cmudict.phones");
-    Stream<String> stream = CmuDict.getPhonesStream();
+    logger.info("Loading cmudict.symbols");
+    Stream<String> stream = CmuDict.getSymbolsStream();
     List<String> symbolsList = new ArrayList<String>();
     stream.forEach(line -> {
       symbolsList.add(line);
@@ -79,6 +81,7 @@ public class CmuDict {
   }
 
   public static final Map<String, String> getVp() {
+    logger.info("Loading cmudict.vp");
     Stream<String> stream = CmuDict.getVpStream();
     Map<String, String> vpMap = new HashMap<String, String>();
     stream.forEach(line -> {
@@ -109,21 +112,18 @@ public class CmuDict {
     return CmuDict.resourceAsString("cmusphinx/cmudict/LICENSE");
   }
 
-  private static final Stream<String> resourceAsStream(final String resourceName) {
-    ClassLoader classLoader = CmuDict.class.getClassLoader();
-    InputStream in = classLoader.getResourceAsStream(
-          resourceName);
+  private static final Stream<String> resourceAsStream(final String resource) {
+    InputStream in = Thread.currentThread()
+        .getContextClassLoader().getResourceAsStream(resource);
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     Stream<String> resourceStream = reader.lines();
     return resourceStream;
   }
 
-  private static final String resourceAsString(final String resourceName) {
-    String resourceString = new String();
-    Stream<String> stream = CmuDict.resourceAsStream(resourceName);
-    stream.forEach(line -> {
-      resourceString.concat(line);
-    });
+  private static final String resourceAsString(final String resource) {
+    // Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
+    Stream<String> stream = CmuDict.resourceAsStream(resource);
+    String resourceString = stream.collect(Collectors.joining("\n"));
     return resourceString;
   }
 
