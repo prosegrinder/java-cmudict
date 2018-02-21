@@ -108,7 +108,7 @@ public class CmuDict {
    * @return string of The CMU Dictionary license file
    *
    */
-  public static final String getLicense() {
+  public static final String getLicenseString() {
     return CmuDict.resourceAsString("cmusphinx/cmudict/LICENSE");
   }
 

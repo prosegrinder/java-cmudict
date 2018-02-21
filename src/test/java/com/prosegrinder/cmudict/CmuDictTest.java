@@ -58,7 +58,7 @@ public class CmuDictTest {
   @Test
   public final void testLicense() {
     int EXPECTED_LENGTH = 1753;
-    String license = CmuDict.getLicense();
+    String license = CmuDict.getLicenseString();
     assertEquals(EXPECTED_LENGTH, license.length());
   }
 
